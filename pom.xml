@@ -383,7 +383,6 @@
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
-                            <goal>report</goal>
                         </goals>
                     </execution>
                     <execution>
@@ -393,8 +392,27 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-                </executions>
-            </plugin>
+                     <execution>
+                          <id>post-unit-test</id>
+                          <phase>test</phase>
+                          <goals>
+                            <goal>report</goal>
+                          </goals>
+                          <configuration>
+                           <!-- Sets the path to the file which contains the execution data. -->
+                  
+                           <dataFile>target/jacoco.exec</dataFile>
+                           <!-- Sets the output directory for the code coverage report. -->
+                           <outputDirectory>target/site/jacoco</outputDirectory>
+                         </configuration>
+                       </execution>
+                     </executions>
+                     <configuration>
+                       <systemPropertyVariables>
+                         <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                       </systemPropertyVariables>
+                   </configuration>
+                 </plugin>
 
             <!--Specify the encoding for copying resources-->
             <plugin>
